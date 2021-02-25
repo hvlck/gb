@@ -11,7 +11,21 @@ func TestSearch(t *testing.T) {
 		t.Fatalf("failed to fetch package: %s", err)
 	}
 
-	res, err := json.Marshal(resp)
+	_, err = json.Marshal(resp)
+
+	if err != nil {
+		t.Fatalf("failed to deserialize json: %s", err)
+	}
+}
+
+func TestGetPackage(t *testing.T) {
+	resp, err := FetchPackage("test")
+
+	if err != nil {
+		t.Fatalf("failed to get package: %s", err)
+	}
+
+	_, err = json.Marshal(resp)
 
 	if err != nil {
 		t.Fatalf("failed to deserialize json: %s", err)
