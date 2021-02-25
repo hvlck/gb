@@ -37,12 +37,13 @@ type PackagePublisher struct {
 	Username string `json:"username"`
 }
 
+// PackageUser returns information about an NPM user
 type PackageUser struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
 }
 
-// PackageFlags
+// PackageFlags unsure
 type PackageFlags struct {
 	Unstable bool `json:"unstable"`
 }
@@ -124,6 +125,7 @@ func Search(pkg string, opts SearchOptions) (SearchResults, error) {
 	return r, nil
 }
 
+// Dist returns information about the package's distribution
 type Dist struct {
 	Integrity    string `json:"integrity"`
 	Shasum       string `json:"shasum"`
@@ -133,10 +135,12 @@ type Dist struct {
 	NpmSignature string `json:"npm-signature"`
 }
 
+// Bugs returns information for filing bugs
 type Bugs struct {
 	URL string `json:"url"`
 }
 
+// GetPackageVersion returns information about a package revision
 type GetPackageVersion struct {
 	Name        string               `json:"name"`
 	Version     string               `json:"version"`
@@ -144,7 +148,7 @@ type GetPackageVersion struct {
 	Main        string               `json:"main"`
 	Repository  GetPackageRepository `json:"repository"`
 	Keywords    []string             `json:"keywords"`
-	Author      GetPackageAuthor     `json:"author"`
+	Author      PackageAuthor        `json:"author"`
 	License     string               `json:"license"`
 	Bugs        Bugs                 `json:"bugs"`
 	Homepage    string               `json:"homepage"`
@@ -159,21 +163,20 @@ type GetPackageVersion struct {
 	HasShrinkwrap bool `json:"_hasShrinkwrap"`
 }
 
+// GetPackageTime returns the date of creation, revision, and times at which versions were published
 type GetPackageTime struct {
 	Created  string `json:"created"`
 	Modified string `json:"modified"`
 	string   string
 }
 
+// GetPackageRepository the url and type of repository for the package
 type GetPackageRepository struct {
 	Type string `json:"type"`
 	URL  string `json:"url"`
 }
 
-type GetPackageAuthor struct {
-	Name string `json:"name"`
-}
-
+// GetPackage returns information about a npm package
 type GetPackage struct {
 	Id             string                       `json:"_id"`
 	Rev            string                       `json:"_rev"`
@@ -186,13 +189,14 @@ type GetPackage struct {
 	Homepage       string                       `json:"homepage"`
 	Keywords       []string                     `json:"keywords"`
 	Repository     GetPackageRepository         `json:"repository"`
-	Author         GetPackageAuthor             `json:"author"`
+	Author         PackageAuthor                `json:"author"`
 	Bugs           Bugs                         `json:"bugs"`
 	License        string                       `json:"license"`
 	Readme         string                       `json:"readme"`
 	ReadmeFilename string                       `json:"readmeFilename"`
 }
 
+// FetchPackage fetch information about a specific NPM package
 func FetchPackage(pkg string) (GetPackage, error) {
 	resp, err := http.Get("https://registry.npmjs.org/" + pkg)
 	if err != nil {
