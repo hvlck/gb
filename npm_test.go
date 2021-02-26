@@ -12,6 +12,10 @@ func TestSearch(t *testing.T) {
 		t.Fatalf("failed to fetch package: %s", err)
 	}
 
+	if len(resp.Objects) < 5 {
+		t.Fatalf("too little results returned: %v", len(resp.Objects))
+	}
+
 	_, err = json.Marshal(resp)
 
 	if err != nil {
