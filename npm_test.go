@@ -50,7 +50,7 @@ func TestGetPackage(t *testing.T) {
 		t.Fatalf("description invalid: %s", resp.Description)
 	}
 
-	if resp.Homepage != "https://github.com/EthanJustice/taita#readme" {
+	if resp.Homepage != "https://github.com/hvlck/taita#readme" {
 		t.Fatalf("homepage invalid: %s", resp.Homepage)
 	}
 
@@ -58,7 +58,7 @@ func TestGetPackage(t *testing.T) {
 		t.Fatalf("keywords invalid")
 	}
 
-	if resp.Repository.Type != "git" || resp.Repository.URL != "git+https://github.com/EthanJustice/taita.git" {
+	if resp.Repository.Type != "git" || resp.Repository.URL != "git+https://github.com/hvlck/taita.git" {
 		t.Fatalf("repository invalid: %s | %s", resp.Repository.Type, resp.Repository.URL)
 	}
 
@@ -66,7 +66,7 @@ func TestGetPackage(t *testing.T) {
 		t.Fatalf("username not correct: %s", resp.Author.Username)
 	}
 
-	if resp.Bugs.URL != "https://github.com/EthanJustice/taita/issues" {
+	if resp.Bugs.URL != "https://github.com/hvlck/taita/issues" {
 		t.Fatalf("invalid bug url: %s", resp.Bugs.URL)
 	}
 
